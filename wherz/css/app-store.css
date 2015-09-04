@@ -1,0 +1,26 @@
+.button span.icon {
+	width: 30px;
+	height: 35px;
+	display: block;
+	background: url('../img/button_icons.png') no-repeat top left;
+	float: left;
+	margin-right: 12px;
+}
+
+.button#apple {
+	background: #2cbbfd; /* Old browsers */
+}
+
+.button#android {
+	background: #98d463; /* Old browsers */
+}
+.button#android span.icon {
+	background-position: 0px -35px;
+}
+
+.button#windows {
+}
+
+.button#windows span.icon {
+	background-position: 0px -70px;
+}
