@@ -5,39 +5,51 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
-<!DOCTYPE html>
-<html>	
-<head>
-<title>User Login Flat Responsive widget Template :: w3layouts</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<meta name="keywords" content="User Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates" />
-<link href="css/style.css" rel='stylesheet' type='text/css' />
-<!--web-fonts-->
-<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<!--/web-fonts-->
-</head>
-<body>
-<!--User-Login-->
-<h1>User Login</h1>
-<div class="avtar">
-	<img src="images/avtar.png" />
-</div>
-	<div class="login-form">
-		<p>New user?<a href="#">Register here!</a></p>
-			<form>
-				<div class="form-text">
-					<input type="text" class="text" value="USERNAME" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" >
-					<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
-				</div>
-					<input type="submit"value="GO" >
-			</form>
-	</div>
-<!--/User-Login-->
-<!--start-copyright-->
-<div class="copy-right">
-	<p>Template by <a href="http://w3layouts.com">w3layouts</a></p> 
-</div>
-<!--//end-copyright-->	
-</body>
-</html>
+
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container login-top">
+        <div class="row row-padding">
+            <div class="col-sm-6 col-md-4 col-md-offset-4">
+                <h1 class="text-center"></h1>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
+                    <li><a href="#create-account" data-toggle="tab">Create Account</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane active" id="login">
+                        <form class="form-signin" action='' method="POST">
+                            <input type="text" class="form-control" placeholder="Email" required autofocus>
+                            <input type="password" class="form-control" placeholder="Password" required>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                            <label class="checkbox pull-left">
+                                <input type="checkbox" value="remember-me">
+                                Remember me
+                            </label>
+                            <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="create-account">
+                        <form class="form-signin" id="tab">
+                            <input type="text" class="form-control" placeholder="Email" required autofocus>
+                            <input type="password" class="form-control" placeholder="Password" required>
+                            <input type="password" class="form-control" placeholder="Comfirm Password" required>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+                            <label class="checkbox pull-left">
+                                <input type="checkbox" value="remember-me">
+                                Remember me
+                            </label>
+                            <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+{% endblock %}
+ 
