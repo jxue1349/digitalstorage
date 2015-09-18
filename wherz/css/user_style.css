@@ -1,0 +1,20 @@
+.user-form {
+	padding-top: 70px;
+}
+.user-center h3 {
+	text-align: center;
+}
+
+.user-padding {
+    padding: 15px;
+    font-size: 16px;
+}
+.user-input {
+	padding-left: 35px;
+}
+.user-input1 {
+	padding-left: 120px;
+}
+.img-user-storage {
+	max-height: 300px;
+}

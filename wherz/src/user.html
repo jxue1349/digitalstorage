@@ -1,0 +1,53 @@
+
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+
+{% extends "base_user.html" %}
+
+{% block content %}
+
+    <div class="container login-top">
+        <!--<label>Welcome {{email}}</label>-->
+    	<form class="user-form form-inline" method="POST">
+    		<div class="row">
+	    		<div class="col-md-6 user-center">
+	    			<img src="img/storage.jpg" alt="" class="img-circle img-responsive img-user-storage center-block">
+	    			<h3>What do you want to store?</h3>
+	    			<div class="row form-group user-input">
+	    				<input class="form-control" type="text" name="userStuff" placeholder="x">
+	    				<label> in/on </label>
+	    				<input class="form-control" type="text" name="userPlace" placeholder="y">
+	    				<input class="btn btn-default" type="submit" name="userSubmit" value="submit">
+	    			</div>
+	    		</div>
+	    		<div class="col-md-6 user-center">
+	    			{% if img_url %}
+	    				<img src="{{img_url}}" alt="" class="img-responsive img-user-storage center-block">
+	    			{% else %}
+	    				<img src="img/storage_find.jpg" alt="" class="img-circle img-responsive img-user-storage center-block">
+	    			{% endif %}
+	    			<h3>What do you want to find?</h3>
+	    			<div class="row form-group user-input1">
+	    				<label>Where is my</label>
+	    				<input class="form-control" type="text" name="userFind" placeholder="x">
+	    				<input class="btn btn-default" type="submit" name="userQuery" value="Query">
+	    			</div>
+	    		</div>
+    		</div>
+    		<div class="row text-center">
+    			<div class="col-md-6"></div>
+    			<label class="col-md-6">{{objectPlace}}</label>
+    		</div>
+    	</form>
+    </div>
+
+
+
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+{% endblock %}
+ 

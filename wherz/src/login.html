@@ -15,34 +15,50 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="col-sm-6 col-md-4 col-md-offset-4">
                 <h1 class="text-center"></h1>
                 <ul class="nav nav-tabs">
+                    {% if rtype == "signin" %}
                     <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
                     <li><a href="#create-account" data-toggle="tab">Create Account</a></li>
+                    {% elif rtype == "signup" %}
+                    <li><a href="#login" data-toggle="tab">Login</a></li>
+                    <li class="active"><a href="#create-account" data-toggle="tab">Create Account</a></li>
+                    {% endif %}
                 </ul>
                 <div id="myTabContent" class="tab-content">
+                    {% if rtype == "signin" %}
                     <div class="tab-pane active" id="login">
+                    {% elif rtype == "signup" %}
+                    <div class="tab-pane fade" id="login">
+                    {% endif %}
                         <form class="form-signin" action='' method="POST">
-                            <input type="text" class="form-control" placeholder="Email" required autofocus>
-                            <input type="password" class="form-control" placeholder="Password" required>
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                            <input type="text" class="form-control" name="email" placeholder="Email" required autofocus value={{useremail}}>
+                            <input type="password" class="form-control" name="pwd" placeholder="Password" required value={{pwd}}>
+                            <input class="btn btn-lg btn-primary btn-block" type="submit" name="signin-button" value="Sign In"></input>
                             <label class="checkbox pull-left">
                                 <input type="checkbox" value="remember-me">
                                 Remember me
                             </label>
                             <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
                         </form>
+                        <label>{{error}}</label>
                     </div>
+                    {% if rtype == "signin" %}
                     <div class="tab-pane fade" id="create-account">
-                        <form class="form-signin" id="tab">
-                            <input type="text" class="form-control" placeholder="Email" required autofocus>
-                            <input type="password" class="form-control" placeholder="Password" required>
-                            <input type="password" class="form-control" placeholder="Comfirm Password" required>
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+                    {% elif rtype == "signup" %}
+                    <div class="tab-pane active" id="create-account">
+                    {% endif %}
+                        <form class="form-signin" id="tab" method="post">
+                            <input type="text" class="form-control" name="email" placeholder="Email" required autofocus value={{useremail}}>
+                            <input type="password" class="form-control" name="pwd" placeholder="Password" required value={{pwd}}>
+                            <input type="password" class="form-control" name="conf-signup-pwd" placeholder="Comfirm Password" required value={{cpwd}}>
+                            <input class="btn btn-lg btn-primary btn-block" type="submit" name="signup-button" value="Sign Up"></input>
+                            
                             <label class="checkbox pull-left">
                                 <input type="checkbox" value="remember-me">
                                 Remember me
                             </label>
                             <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
                         </form>
+                        <label>{{error}}</label>
                     </div>
                 </div>
             </div>
