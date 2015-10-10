@@ -113,7 +113,23 @@ h6 {
     background-color: #f8f8f8;
 }
 
+.content-section-an {
+    padding: 50px 0;
+    border-top: 51px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+
 .content-section-b {
+    padding: 50px 0;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+.content-section-bn {
+    padding: 50px 0;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+.content-section-cn {
     padding: 50px 0;
     border-top: 1px solid #e7e7e7;
     border-bottom: 1px solid #e7e7e7;
@@ -127,7 +143,7 @@ h6 {
 .section-heading-spacer {
     float: left;
     width: 200px;
-    border-top: 3px solid #e7e7e7;
+    border-top: 3px;
 }
 
 .banner {

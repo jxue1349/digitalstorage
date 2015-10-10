@@ -10,3 +10,20 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: UserGroup
+  properties:
+  - name: userEmail
+  - name: created
+    direction: desc
+
+- kind: UserGroup
+  properties:
+  - name: userEmail=
+  - name: created
+    direction: desc
+
+- kind: UserGroup
+  properties:
+  - name: userGroupID
+  - name: last_modified
+    direction: desc

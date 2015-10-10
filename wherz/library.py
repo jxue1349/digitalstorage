@@ -9,11 +9,11 @@ import random
 import string
 import hashlib
 import hmac
-
 import os
 import jinja2
 import webapp2
 import urllib2
+import re
 
 # third party lib
 from google.appengine.ext import vendor
@@ -34,19 +34,25 @@ def make_salt():
 def make_pw_hash(name, pw, salt=None):
 	if not salt:
 		salt = make_salt()
-	h = hashlib.sha256(secret.secret() + name + pw + salt).hexdigest()
+	h = hashlib.sha256(secret() + name + pw + salt).hexdigest()
 	return '%s|%s' % (h, salt)
 def valid_pw(name, pw, h):
 	salt = h.split("|")[1]
 	return h == make_pw_hash(name, pw, salt)
-def users_key(group = 'default'):
-	return db.Key.from_path('users', group)
+
 def make_secure_val(val):
-	return '%s|%s' % (val, hmac.new(secret.secret(), val).hexdigest())
+	return '%s|%s' % (val, hmac.new(secret(), val).hexdigest())
 def check_secure_val(secure_val):
 	val = secure_val.split('|')[0]
 	if secure_val == make_secure_val(val):
 		return val
+def valid_email(email):
+	email_re = re.compile(r"^[\S]+@[\S]+\.[\S]+$")
+	return email and email_re.match(email)
+
+def valid_password(password):
+	password_re = re.compile(r"^[a-zA-Z0-9_!@#$%^&*-]{3,20}$")
+	return password and password_re.match(password)
 
 # Render page handler 
 class Handler(webapp2.RequestHandler):

@@ -1,0 +1,409 @@
+{% extends "base_user.html" %}
+
+{% block content %}
+    <!-- Page Content -->
+
+	<a  name="private"></a>
+    <div class="content-section-an">
+
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-9 col-lg-offset-1 col-sm-push-2  col-sm-2">
+                    <div id="info">
+                        <p id="info_start">Click on the microphone icon and begin speaking.</p>
+                        <p id="info_speak_now">Speak now.</p>
+                        <p id="info_no_speech">No speech was detected. You may need to adjust your
+                            <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+                            microphone settings</a>.</p>
+                        <p id="info_no_microphone" style="display:none">
+                            No microphone was found. Ensure that a microphone is installed and that
+                            <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+                            microphone settings</a> are configured correctly.</p>
+                        <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
+                        <p id="info_denied">Permission to use microphone was denied.</p>
+                        <p id="info_blocked">Permission to use microphone is blocked. To change,
+                            go to chrome://settings/contentExceptions#media-stream</p>
+                        <p id="info_upgrade">Web Speech API is not supported by this browser.
+                             Upgrade to <a href="//www.google.com/chrome">Chrome</a>
+                            version 25 or later.</p>
+                    </div>
+                    <button id="start_button" class="user-form" onclick="startButton(event)"><img id="start_img" src="img/mic.gif" alt="Start"></button>
+                    <form id="results" class="user-form form-inline" method="POST">
+                        <input id="final_span" class="form-control final" type="text" name="userInput" placeholder="x in/on y or where is my">
+                        <input class="btn btn-default form-control" type="submit" name="userSubmit" value="submit">
+                        <select id="select_type" name="user_type">
+                          <option>Private</option>
+                          <option>Group</option>
+                          <option>Public</option>
+                        </select>
+                        <select id="select_group" name="user_select_groups">
+                          {% if not user_groups %}
+                            <option>No groups</option>
+                          {% else %}
+                            {% for key in user_groups %}
+                              <option>{{key}}</option>
+                            {% endfor%}
+                          {% endif %}
+                        </select>
+                        <div class="center" id="div_language">
+                            <select id="select_language" onchange="updateCountry()"></select>
+                            &nbsp;&nbsp;
+                            <select id="select_dialect"></select>
+                        </div>
+                        <br>
+                        <br>
+                        <label>{{objectPlace}}</label>
+                    </form>
+
+
+                </div>
+                <div class="col-lg-2 col-sm-pull-10 col-sm-10">
+                    <img class="img-responsive" src="img/settings_private.jpg" alt="">
+                    <h3 class="text-center">Private</h3>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+    <a  name="group"></a>
+    <div class="content-section-bn">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-9 col-lg-offset-1 col-sm-push-2  col-sm-2">
+                  <div class="form-inline">
+                    <select multiple class="form-control user-groups" name="user_select_group" id="group_lists">
+                      {% if not user_groups %}
+                        <option>No groups</option>
+                      {% else %}
+                        {% for key in user_groups %}
+                          <option onclick="groupMemberShow()">{{key}}</option>
+                        {% endfor%}
+                      {% endif %}
+                    </select>
+                    {% if user_groups %}
+                      {% for key in user_groups %}
+                        <select multiple class="user-id-list" id="{{key}}">
+                          {% for value in user_groups[key] %}
+                            <option>{{value}}</option>
+                          {% endfor %}
+                        </select>
+                      {% endfor%}
+                    {% endif %}
+                  </div>
+                  
+                  <p id="demo"></p>
+                  <form method="POST">
+                    <br>
+                    <label>Create new Groups</label>
+                    <div class="form-inline">
+                      <div class="form-group">
+                        <label>Group Name</label>
+                        <input type="text" class="form-control" name="group_name" placeholder="Family">
+                      </div>
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="friend_email" placeholder="dad@example.com">
+                      </div>
+                      <input type="submit" class='btn btn-default' name="invitation" value="Send invitation">
+                      <label>{{error}}</label>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-lg-2 col-sm-pull-10  col-sm-10">
+                    <img class="img-responsive" src="img/settings_groups.jpg" alt="">
+                    <h3 class="text-center">Group</h3>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
+    <a  name="public"></a>
+    <div class="content-section-cn">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-9 col-lg-offset-1 col-sm-push-2  col-sm-2">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-6"> 
+                            <hr class="section-heading-spacer">
+                            <div class="clearfix"></div>
+                            <h2 class="section-heading">Find your favorite<br>people</h2>
+                            <p class="lead">Want to know where is your be-loved ones? <font class="mtopnav-brand">Where<font color="#00ced1">Last</font></font> make location sharing more easier for you. You can also find your doctors, babysitter ... you name it!</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-6">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-pull-10  col-sm-10">
+                    <img class="img-responsive" src="img/settings_public.jpg" alt="">
+                    <h3 class="text-center">Public</h3>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#">Contact Us</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#">facebook</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#">twitter</a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted small">Copyright &copy; WhereLast 2015. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- script -->
+    <script type="text/javascript">
+        var langs =
+        [['Afrikaans',       ['af-ZA']],
+         ['Bahasa Indonesia',['id-ID']],
+         ['Bahasa Melayu',   ['ms-MY']],
+         ['Català',          ['ca-ES']],
+         ['Čeština',         ['cs-CZ']],
+         ['Deutsch',         ['de-DE']],
+         ['English',         ['en-AU', 'Australia'],
+                             ['en-CA', 'Canada'],
+                             ['en-IN', 'India'],
+                             ['en-NZ', 'New Zealand'],
+                             ['en-ZA', 'South Africa'],
+                             ['en-GB', 'United Kingdom'],
+                             ['en-US', 'United States']],
+         ['Español',         ['es-AR', 'Argentina'],
+                             ['es-BO', 'Bolivia'],
+                             ['es-CL', 'Chile'],
+                             ['es-CO', 'Colombia'],
+                             ['es-CR', 'Costa Rica'],
+                             ['es-EC', 'Ecuador'],
+                             ['es-SV', 'El Salvador'],
+                             ['es-ES', 'España'],
+                             ['es-US', 'Estados Unidos'],
+                             ['es-GT', 'Guatemala'],
+                             ['es-HN', 'Honduras'],
+                             ['es-MX', 'México'],
+                             ['es-NI', 'Nicaragua'],
+                             ['es-PA', 'Panamá'],
+                             ['es-PY', 'Paraguay'],
+                             ['es-PE', 'Perú'],
+                             ['es-PR', 'Puerto Rico'],
+                             ['es-DO', 'República Dominicana'],
+                             ['es-UY', 'Uruguay'],
+                             ['es-VE', 'Venezuela']],
+         ['Euskara',         ['eu-ES']],
+         ['Français',        ['fr-FR']],
+         ['Galego',          ['gl-ES']],
+         ['Hrvatski',        ['hr_HR']],
+         ['IsiZulu',         ['zu-ZA']],
+         ['Íslenska',        ['is-IS']],
+         ['Italiano',        ['it-IT', 'Italia'],
+                             ['it-CH', 'Svizzera']],
+         ['Magyar',          ['hu-HU']],
+         ['Nederlands',      ['nl-NL']],
+         ['Norsk bokmål',    ['nb-NO']],
+         ['Polski',          ['pl-PL']],
+         ['Português',       ['pt-BR', 'Brasil'],
+                             ['pt-PT', 'Portugal']],
+         ['Română',          ['ro-RO']],
+         ['Slovenčina',      ['sk-SK']],
+         ['Suomi',           ['fi-FI']],
+         ['Svenska',         ['sv-SE']],
+         ['Türkçe',          ['tr-TR']],
+         ['български',       ['bg-BG']],
+         ['Pусский',         ['ru-RU']],
+         ['Српски',          ['sr-RS']],
+         ['한국어',            ['ko-KR']],
+         ['中文',             ['cmn-Hans-CN', '普通话 (中国大陆)'],
+                             ['cmn-Hans-HK', '普通话 (香港)'],
+                             ['cmn-Hant-TW', '中文 (台灣)'],
+                             ['yue-Hant-HK', '粵語 (香港)']],
+         ['日本語',           ['ja-JP']],
+         ['Lingua latīna',   ['la']]];
+        for (var i = 0; i < langs.length; i++) {
+          select_language.options[i] = new Option(langs[i][0], i);
+        }
+        select_language.selectedIndex = 6;
+        updateCountry();
+        select_dialect.selectedIndex = 6;
+        showInfo('info_start');
+        function updateCountry() {
+          for (var i = select_dialect.options.length - 1; i >= 0; i--) {
+            select_dialect.remove(i);
+          }
+          var list = langs[select_language.selectedIndex];
+          for (var i = 1; i < list.length; i++) {
+            select_dialect.options.add(new Option(list[i][1], list[i][0]));
+          }
+          select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
+        }
+        var create_email = false;
+        var final_transcript = '';
+        var recognizing = false;
+        var ignore_onend;
+        var start_timestamp;
+        if (!('webkitSpeechRecognition' in window)) {
+            upgrade();
+        } else {
+          start_button.style.display = 'inline-block';
+          var recognition = new webkitSpeechRecognition();
+          recognition.continuous = false;
+          recognition.interimResults = false;
+          recognition.onstart = function() {
+            recognizing = true;
+            showInfo('info_speak_now');
+            start_img.src = 'img/mic-animate.gif';
+          };
+          recognition.onerror = function(event) {
+            if (event.error == 'no-speech') {
+              start_img.src = 'img/mic.gif';
+              showInfo('info_no_speech');
+              ignore_onend = true;
+            }
+            if (event.error == 'audio-capture') {
+              start_img.src = 'img/mic.gif';
+              showInfo('info_no_microphone');
+              ignore_onend = true;
+            }
+            if (event.error == 'not-allowed') {
+              if (event.timeStamp - start_timestamp < 100) {
+                showInfo('info_blocked');
+              } else {
+                showInfo('info_denied');
+              }
+              ignore_onend = true;
+            }
+          };
+          recognition.onend = function() {
+            recognizing = false;
+            if (ignore_onend) {
+              return;
+            }
+            start_img.src = 'img/mic.gif';
+            if (!final_transcript) {
+              showInfo('info_start');
+              return;
+            }
+            showInfo('');
+            if (window.getSelection) {
+              window.getSelection().removeAllRanges();
+              var range = document.createRange();
+              range.selectNode(document.getElementById('final_span'));
+              window.getSelection().addRange(range);
+            }
+          };
+          recognition.onresult = function(event) {
+            var interim_transcript = '';
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+              if (event.results[i].isFinal) {
+                final_transcript += event.results[i][0].transcript;
+              } else {
+                interim_transcript += event.results[i][0].transcript;
+              }
+            }
+            final_transcript = capitalize(final_transcript);
+            final_span.value = linebreak(final_transcript);
+            interim_span.value = linebreak(interim_transcript);
+            if (final_transcript || interim_transcript) {
+              showButtons('inline-block');
+              endRecording();
+            }
+          };
+        }
+        function upgrade() {
+          start_button.style.visibility = 'hidden';
+          showInfo('info_upgrade');
+        }
+        var two_line = /\n\n/g;
+        var one_line = /\n/g;
+        function linebreak(s) {
+          return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+        }
+        var first_char = /\S/;
+        function capitalize(s) {
+          return s.replace(first_char, function(m) { return m.toUpperCase(); });
+        }
+
+        function startButton(event) {
+          if (recognizing) {
+            recognition.stop();
+            return;
+          }
+          final_transcript = '';
+          recognition.lang = select_dialect.value;
+          recognition.start();
+          ignore_onend = false;
+          final_span.value = '';
+          interim_span.value = '';
+          start_img.src = 'mic-slash.gif';
+          showInfo('info_allow');
+          showButtons('none');
+          start_timestamp = event.timeStamp;
+        }
+        function endRecording() {
+            if(recognizing) {
+                recognition.stop();
+            }
+        }
+        function showInfo(s) {
+          if (s) {
+            for (var child = info.firstChild; child; child = child.nextSibling) {
+              if (child.style) {
+                child.style.display = child.id == s ? 'inline' : 'none';
+              }
+            }
+            info.style.visibility = 'visible';
+          } else {
+            info.style.visibility = 'hidden';
+          }
+        }
+        var current_style;
+        function showButtons(style) {
+          if (style == current_style) {
+            return;
+          }
+          current_style = style;
+          copy_button.style.display = style;
+          email_button.style.display = style;
+          copy_info.style.display = 'none';
+          email_info.style.display = 'none';
+        }
+        var lastSelectId ='';
+        function groupMemberShow() {
+          var select_group_name = document.getElementById("group_lists").selectedIndex;
+          var select_group_id = document.getElementById("group_lists").options[select_group_name].text;
+          document.getElementById(select_group_id).className = "form-control user-id-list-show";
+          if (lastSelectId != '') {
+            document.getElementById(lastSelectId).className = "user-id-list";
+          }
+          document.getElementById("demo").innerHTML = " selected " + lastSelectId + " last time";
+          lastSelectId = select_group_id;
+
+        }
+    </script>
+{% endblock %}

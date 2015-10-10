@@ -1,10 +1,13 @@
 .user-form {
-	padding-top: 70px;
+	padding-top: 40px;
+	font-size: 14px;
 }
 .user-center h3 {
 	text-align: center;
 }
-
+.user-option {
+	font-size: 10px;
+}
 .user-padding {
     padding: 15px;
     font-size: 16px;
@@ -15,6 +18,50 @@
 .user-input1 {
 	padding-left: 120px;
 }
+.user-groups {
+	width: 100%;
+}
+.user-id-list {
+	display: none;
+}
+.user-id-list-show {
+	display: inline;
+}
 .img-user-storage {
 	max-height: 300px;
+}
+#start_button {
+	border: 0;
+	background-color:transparent;
+	float: left;
+}
+#start_img {
+	width: 70%;
+	height: auto;
+}
+#info {
+	font-size: 10px;
+	text-align: center;
+	color: #777;
+	visibility: hidden;
+}
+.right {
+	float: right;
+}
+.final {
+	color: black;
+	padding-right: 3px; 
+}
+.interim {
+	color: gray;
+}
+.center {
+	padding: 10px;
+	float: right;
+}
+.info {
+	font-size: 14px;
+	text-align: center;
+	color: #777;
+	display: none;
 }
